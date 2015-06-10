@@ -1,0 +1,18 @@
+{
+    "name": "corpsepk/yii2-emt",
+    "description": "Typographer Muravyova for Yii2",
+    "keywords": ["yii2", "texts", "typographer", "EMT 3.4"],
+    "homepage": "https://github.com/corpsepk/yii2-emt",
+    "type": "yii2-extension",
+    "authors": [
+        {
+            "name": "Alexsandr Khramov",
+            "email": "corpsepk@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {"corpsepk\\yii2EMTypograph\\": ""}
+    }
+}
