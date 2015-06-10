@@ -3,8 +3,13 @@ yii2-emt Типограф Муравьёва
 
 Сайт типографа http://mdash.ru/
 
-#Как использовать
-В модели
+# Установка
+```
+composer require 'corpsepk/yii2-emt:dev-master'
+```
+
+# Использование
+Модель
 ```php
 use corpsepk\yii2emt\EMTypograph;
 
