@@ -13,6 +13,6 @@
     "require": {
     },
     "autoload": {
-        "psr-4": {"corpsepk\\yii2EMTypograph\\": ""}
+        "psr-4": {"corpsepk\\yii2emt\\": ""}
     }
 }
