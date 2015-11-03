@@ -214,7 +214,7 @@ class EMT_Base
     {
         if (count($this->_safe_blocks))
         {
-            $safeType = true === $way ? "EMT_Lib::encrypt_tag(\$m[2])" : "stripslashes(EMT_Lib::decrypt_tag(\$m[2]))";
+            $safeType = true === $way ? "\\corpsepk\\yii2emt\\EMT_Lib::encrypt_tag(\$m[2])" : "stripslashes(\\corpsepk\\yii2emt\\EMT_Lib::decrypt_tag(\$m[2]))";
             $safeblocks = true === $way ? $this->_safe_blocks : array_reverse($this->_safe_blocks);
             foreach ($safeblocks as $block)
             {
