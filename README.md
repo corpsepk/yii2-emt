@@ -5,7 +5,7 @@ yii2-emt Типограф Муравьёва
 
 # Установка
 ```
-composer require 'corpsepk/yii2-emt:dev-master'
+composer require 'corpsepk/yii2-emt:^0.1'
 ```
 
 # Использование
