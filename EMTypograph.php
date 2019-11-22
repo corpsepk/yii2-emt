@@ -16,7 +16,6 @@ use corpsepk\yii2emt\EMT_Tret_Quote;
 use corpsepk\yii2emt\EMT_Tret_Space;
 use corpsepk\yii2emt\EMT_Tret_Symbol;
 use corpsepk\yii2emt\EMT_Tret_Text;
-use yii\helpers\VarDumper;
 
 /**
 * Evgeny Muravjev Typograph, http://mdash.ru

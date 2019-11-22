@@ -112,9 +112,18 @@ class EMT_Tret_Quote extends \corpsepk\yii2emt\EMT_Tret
                         $__ay = 0;
                         if($__ax)
                         {
-                            $k = preg_replace_callback("/(^|[^0-9])([0-9]+)\&raquo\;/ui",
-                                create_function('$m','global $__ax,$__ay; $__ay++; if($__ay==$__ax){ return $m[1].$m[2]."&Prime;";} return $m[0];'),
-                                $k);
+                            $k = preg_replace_callback(
+                                "/(^|[^0-9])([0-9]+)\&raquo\;/ui",
+                                function ($m) {
+                                    global $__ax,$__ay;
+                                    $__ay++;
+                                    if ($__ay==$__ax) {
+                                        return $m[1].$m[2]."&Prime;";
+                                    }
+                                    return $m[0];
+                                },
+                                $k
+                            );
                             $amount = 1;
                         }
 

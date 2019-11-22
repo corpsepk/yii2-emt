@@ -16,7 +16,6 @@ use corpsepk\yii2emt\EMT_Tret_Quote;
 use corpsepk\yii2emt\EMT_Tret_Space;
 use corpsepk\yii2emt\EMT_Tret_Symbol;
 use corpsepk\yii2emt\EMT_Tret_Text;
-use yii\helpers\VarDumper;
 
 /**
  * Основной класс типографа Евгения Муравьёва
@@ -218,7 +217,13 @@ class EMT_Base
             $safeblocks = true === $way ? $this->_safe_blocks : array_reverse($this->_safe_blocks);
             foreach ($safeblocks as $block)
             {
-                $text = preg_replace_callback("/({$block['open']})(.+?)({$block['close']})/s",   create_function('$m','return $m[1].'.$safeType . '.$m[3];')   , $text);
+                $text = preg_replace_callback(
+                    "/({$block['open']})(.+?)({$block['close']})/s",
+                    function ($m) use ($safeType) {
+                        return $m[1].$safeType.$m[3];
+                    },
+                    $text
+                );
             }
         }
 

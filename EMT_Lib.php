@@ -199,9 +199,21 @@ class EMT_Lib
     public static function safe_tag_chars($text, $way)
     {
         if ($way)
-            $text = preg_replace_callback('/(\<\/?)(.+?)(\>)/s', create_function('$m','return $m[1].( substr(trim($m[2]), 0, 1) === "a" ? "%%___"  : ""  ) . \corpsepk\yii2emt\EMT_Lib::encrypt_tag(trim($m[2]))  . $m[3];'), $text);
+            $text = preg_replace_callback(
+                '/(\<\/?)(.+?)(\>)/s',
+                function ($m) {
+                    return $m[1].( substr(trim($m[2]), 0, 1) === "a" ? "%%___"  : ""  ) . \corpsepk\yii2emt\EMT_Lib::encrypt_tag(trim($m[2]))  . $m[3];
+                },
+                $text
+            );
         else
-            $text = preg_replace_callback('/(\<\/?)(.+?)(\>)/s', create_function('$m','return $m[1].( substr(trim($m[2]), 0, 3) === "%%___" ? \corpsepk\yii2emt\EMT_Lib::decrypt_tag(substr(trim($m[2]), 4)) : \corpsepk\yii2emt\EMT_Lib::decrypt_tag(trim($m[2])) ) . $m[3];'), $text);
+            $text = preg_replace_callback(
+                '/(\<\/?)(.+?)(\>)/s',
+                function ($m) {
+                    return $m[1].( substr(trim($m[2]), 0, 3) === "%%___" ? \corpsepk\yii2emt\EMT_Lib::decrypt_tag(substr(trim($m[2]), 4)) : \corpsepk\yii2emt\EMT_Lib::decrypt_tag(trim($m[2])) ) . $m[3];
+                },
+                $text
+            );
         return $text;
     }
 
@@ -214,7 +226,13 @@ class EMT_Lib
      */
     public static function decode_internal_blocks($text)
     {
-        $text = preg_replace_callback('/'.EMT_Lib::INTERNAL_BLOCK_OPEN.'([a-zA-Z0-9\/=]+?)'.EMT_Lib::INTERNAL_BLOCK_CLOSE.'/s', create_function('$m','return \corpsepk\yii2emt\EMT_Lib::decrypt_tag($m[1]);'), $text);
+        $text = preg_replace_callback(
+            '/'.EMT_Lib::INTERNAL_BLOCK_OPEN.'([a-zA-Z0-9\/=]+?)'.EMT_Lib::INTERNAL_BLOCK_CLOSE.'/s',
+            function ($m) {
+                return \corpsepk\yii2emt\EMT_Lib::decrypt_tag($m[1]);
+            },
+            $text
+        );
         return $text;
     }
 
@@ -650,15 +668,28 @@ class EMT_Lib
      */
     public static function convert_html_entities_to_unicode(&$text)
     {
-        $text = preg_replace_callback("/\&#([0-9]+)\;/",
-            create_function('$m', 'return \corpsepk\yii2emt\EMT_Lib::_getUnicodeChar(intval($m[1]));')
-            , $text);
-        $text = preg_replace_callback("/\&#x([0-9A-F]+)\;/",
-            create_function('$m', 'return \corpsepk\yii2emt\EMT_Lib::_getUnicodeChar(hexdec($m[1]));')
-            , $text);
-        $text = preg_replace_callback("/\&([a-zA-Z0-9]+)\;/",
-            create_function('$m', '$r = \corpsepk\yii2emt\EMT_Lib::html_char_entity_to_unicode($m[1]); return $r ? $r : $m[0];')
-            , $text);
+        $text = preg_replace_callback(
+            "/\&#([0-9]+)\;/",
+            function ($m) {
+                return \corpsepk\yii2emt\EMT_Lib::_getUnicodeChar(intval($m[1]));
+            },
+            $text
+        );
+        $text = preg_replace_callback(
+            "/\&#x([0-9A-F]+)\;/",
+            function ($m) {
+                return \corpsepk\yii2emt\EMT_Lib::_getUnicodeChar(hexdec($m[1]));
+            },
+            $text
+        );
+        $text = preg_replace_callback(
+            "/\&([a-zA-Z0-9]+)\;/",
+            function ($m) {
+                $r = \corpsepk\yii2emt\EMT_Lib::html_char_entity_to_unicode($m[1]);
+                return $r ? $r : $m[0];
+            },
+            $text
+        );
     }
 
     public static function rstrpos ($haystack, $needle, $offset = 0){
