@@ -12,6 +12,8 @@ use corpsepk\yii2emt\EMT_Lib;
  */
 class EMT_Tret {
 
+    public EMT_Base|null $EMT = null;
+
     /**
      * Набор правил в данной группе, который задан изначально
      * Его можно менять динамически добавляя туда правила с помощью put_rule
